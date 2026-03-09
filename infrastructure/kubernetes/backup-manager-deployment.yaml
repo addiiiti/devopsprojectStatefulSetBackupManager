@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backup-manager
+  namespace: backup-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backup-manager
+  template:
+    metadata:
+      labels:
+        app: backup-manager
+    spec:
+      serviceAccountName: backup-manager-sa
+      containers:
+        - name: backup-manager
+          image: backup-manager:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: PROJECT_ROOT
+              value: /app
+          volumeMounts:
+            - name: backup-storage
+              mountPath: /app/backups
+      volumes:
+        - name: backup-storage
+          persistentVolumeClaim:
+            claimName: backup-manager-pvc

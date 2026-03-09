@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-manager-cronjob
+  namespace: backup-manager
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: backup-trigger
+              image: curlimages/curl:8.12.1
+              args:
+                - /bin/sh
+                - -c
+                - curl -X POST http://backup-manager-service:8000/backup
+          restartPolicy: OnFailure
