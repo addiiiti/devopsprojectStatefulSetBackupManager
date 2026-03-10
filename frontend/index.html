@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StatefulSet Backup Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>StatefulSet Backup Manager</h1>
+
+<div class="card">
+    <h2>System Status</h2>
+    <p id="health">Checking...</p>
+</div>
+
+<div class="card">
+    <h2>Actions</h2>
+    <button onclick="createBackup()">Create Backup</button>
+    <button onclick="restoreBackup()">Restore Latest Backup</button>
+</div>
+
+<div class="card">
+    <h2>Available Backups</h2>
+    <ul id="backups"></ul>
+</div>
+
+<div class="card">
+    <h2>Backup History</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Filename</th>
+                <th>Status</th>
+                <th>Size</th>
+            </tr>
+        </thead>
+        <tbody id="history">
+        </tbody>
+    </table>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
