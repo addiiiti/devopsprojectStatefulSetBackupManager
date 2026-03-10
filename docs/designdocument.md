@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0dcb7d5 (Update documentation)
 # Design Document
 ## StatefulSet Backup Manager
 
