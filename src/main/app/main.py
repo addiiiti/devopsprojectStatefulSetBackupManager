@@ -4,7 +4,7 @@ import subprocess
 import os
 import glob
 import json
-
+import subprocess
 app = FastAPI(title="StatefulSet Backup Manager")
 
 PROJECT_ROOT = os.getenv("PROJECT_ROOT", os.path.expanduser("~/devopsprojectstatefulsetbackupmanager"))
@@ -122,3 +122,16 @@ def restore_backup():
         "stderr": result.stderr,
         "script_path": script_path
     }
+@app.get("/pods")
+def get_pods():
+    try:
+        result = subprocess.run(
+            ["kubectl", "get", "pods", "-n", "backup-manager", "-o", "json"],
+            capture_output=True,
+            text=True
+        )
+
+        return json.loads(result.stdout)
+
+    except Exception as e:
+        return {"error": str(e)}
