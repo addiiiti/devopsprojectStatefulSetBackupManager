@@ -51,11 +51,40 @@ async function restoreBackup() {
     await fetch(API + "/restore", {method: "POST"});
     alert("Database restored");
 }
+async function loadPods() {
 
+    const res = await fetch(API + "/pods");
+    const data = await res.json();
+
+    const list = document.getElementById("pods");
+    list.innerHTML = "";
+
+    data.items.forEach(pod => {
+
+        const name = pod.metadata.name;
+        const status = pod.status.phase;
+
+        const li = document.createElement("li");
+        li.innerText = name + " : " + status;
+
+        list.appendChild(li);
+
+    });
+
+}
 function init() {
     loadHealth();
     loadBackups();
     loadHistory();
+    loadPods();
 }
 
 init();
+
+setInterval(() => {
+    loadHealth();
+    loadBackups();
+    loadHistory();
+    loadPods();
+}, 5000);
+
