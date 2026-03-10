@@ -6,27 +6,42 @@ This project implements a simple backup management system for Kubernetes Statefu
 
 The goal of this project is to demonstrate how Kubernetes native components can be used together to build a backup solution for stateful workloads.
 ## Architecture
-The system consists of the following components:
 
-MySQL StatefulSet
+The system consists of the following components.
+
+### MySQL StatefulSet
 Stores application data using a PersistentVolumeClaim.
 
-Backup Manager API
+### Backup Manager API
 A FastAPI service that triggers backup and restore operations.
 
-Persistent Storage
+### Persistent Storage
 Backups are stored in a dedicated PVC so they survive pod restarts.
 
-Kubernetes RBAC
+### Kubernetes RBAC
 Allows the Backup Manager to execute commands inside the MySQL pod.
 
-CronJob Scheduler
+### CronJob Scheduler
 Automatically triggers periodic backups through the API.
 
-High level flow:
+### High Level Flow
+```
+User or CronJob
+      |
+      v
+Backup Manager API
+      |
+      v
+kubectl exec into MySQL Pod
+      |
+      v
+mysqldump
+      |
+      v
+Backup stored in Persistent Volume
+```
 
-User or CronJob → Backup Manager API → kubectl exec into MySQL pod → mysqldump → backup stored in persistent volume
-#### Project Structure
+### Project Structure
 ```devopsprojectstatefulsetbackupmanager/
 
 src/
@@ -170,19 +185,19 @@ Check generated jobs:
 `kubectl get jobs -n backup-manager`
 ## Demonstration Flow
 
-1.Deploy MySQL StatefulSet
+1. Deploy MySQL StatefulSet
 
-2.Insert sample data into the database
+2. Insert sample data into the database
 
-3.Trigger a backup through the API
+3. Trigger a backup through the API
 
-4.Delete database records
+4. Delete database records
 
-5.Restore data using the restore endpoint
+5. Restore data using the restore endpoint
 
-6.Verify that the records are restored
+6. Verify that the records are restored
 
-7.Observe automatic backups created by the CronJob
+7. Observe automatic backups created by the CronJob
 
 ## Future Improvements
 
@@ -197,3 +212,4 @@ Backup retention policies
 ## Conclusion
 
 This project demonstrates how Kubernetes resources such as StatefulSets, PersistentVolumeClaims, Deployments, RBAC, and CronJobs can be combined to implement a basic backup management system for stateful workloads. It provides both manual and automated backup capabilities and tracks backup history for operational visibility.
+
