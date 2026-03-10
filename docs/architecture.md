@@ -21,6 +21,12 @@ Backup File
 |
 v
 Persistent Volume (PVC)
+│
+v
+Backup History Recorded
+│
+v
+Dashboard Displays Status
 ```
 
 ## Components
@@ -35,4 +41,5 @@ MySQL StatefulSet
 Stores application data in persistent storage.
 
 Persistent Volume  
+
 Stores backup files so they remain available after pod restarts.
