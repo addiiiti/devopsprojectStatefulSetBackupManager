@@ -5,7 +5,16 @@ import os
 import glob
 import json
 import subprocess
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(title="StatefulSet Backup Manager")
+app = FastAPI(title="StatefulSet Backup Manager")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 PROJECT_ROOT = os.getenv("PROJECT_ROOT", os.path.expanduser("~/devopsprojectstatefulsetbackupmanager"))
 SCRIPTS_DIR = os.path.join(PROJECT_ROOT, "src", "scripts")
