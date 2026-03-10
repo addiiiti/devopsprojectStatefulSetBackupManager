@@ -81,3 +81,13 @@ table th, table td {
     background-color: #f8d7da;
     color: #721c24;
 }
+#activity-log {
+    list-style: none;
+    padding-left: 0;
+}
+
+#activity-log li {
+    padding: 6px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}

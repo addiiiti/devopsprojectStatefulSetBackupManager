@@ -8,48 +8,53 @@
 <body>
 
 <h1>StatefulSet Backup Manager</h1>
+
 <div id="notification"></div>
+
 <div class="container">
 
-<div class="card">
-<h2>Kubernetes Pods</h2>
-<ul id="pods"></ul>
-</div>
+    <div class="card">
+        <h2>Kubernetes Pods</h2>
+        <ul id="pods"></ul>
+    </div>
 
-<div class="card">
-<h2>System Status</h2>
-<p id="health">Checking...</p>
-</div>
+    <div class="card">
+        <h2>System Status</h2>
+        <p id="health">Checking...</p>
+    </div>
 
-<div class="card">
-<h2>Actions</h2>
-<button onclick="createBackup()">Create Backup</button>
-<button onclick="restoreBackup()">Restore Latest Backup</button>
-</div>
+    <div class="card">
+        <h2>Actions</h2>
+        <button onclick="createBackup()">Create Backup</button>
+        <button onclick="restoreBackup()">Restore Latest Backup</button>
+    </div>
 
-<div class="card">
-<h2>Available Backups</h2>
-<ul id="backups"></ul>
-</div>
+    <div class="card">
+        <h2>Available Backups</h2>
+        <ul id="backups"></ul>
+    </div>
 
-<div class="card">
-<h2>Backup History</h2>
+    <div class="card">
+        <h2>Backup History</h2>
 
-<table>
-<thead>
-<tr>
-<th>Timestamp</th>
-<th>Filename</th>
-<th>Status</th>
-<th>Size (bytes)</th>
-</tr>
-</thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Filename</th>
+                    <th>Status</th>
+                    <th>Size (bytes)</th>
+                </tr>
+            </thead>
 
-<tbody id="history"></tbody>
+            <tbody id="history"></tbody>
+        </table>
+    </div>
 
-</table>
-
-</div>
+    <div class="card">
+        <h2>Activity Log</h2>
+        <ul id="activity-log"></ul>
+    </div>
 
 </div>
 

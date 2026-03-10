@@ -11,6 +11,20 @@ function showNotification(message, type) {
         box.style.display = "none";
     }, 3000);
 }
+function addLog(message) {
+
+    const log = document.getElementById("activity-log");
+
+    const item = document.createElement("li");
+
+    const time = new Date().toLocaleTimeString();
+
+    item.innerText = "[" + time + "] " + message;
+
+    log.prepend(item);
+
+}
+
 async function loadHealth() {
     const res = await fetch(API + "/health");
     const data = await res.json();
@@ -59,12 +73,15 @@ async function createBackup() {
 
     if (data.success) {
         showNotification("Backup created successfully", "success");
+        addLog("Backup created");
     } else {
         showNotification("Backup failed", "error");
+        addLog("Backup failed");
     }
 
     loadBackups();
     loadHistory();
+
 }
 
 async function restoreBackup() {
@@ -74,10 +91,14 @@ async function restoreBackup() {
 
     if (data.success) {
         showNotification("Database restored successfully", "success");
+        addLog("Database restored");
     } else {
         showNotification("Restore failed", "error");
+        addLog("Restore failed");
     }
+
 }
+
 async function loadPods() {
 
     const res = await fetch(API + "/pods");
@@ -113,5 +134,6 @@ setInterval(() => {
     loadBackups();
     loadHistory();
     loadPods();
+    addLog("Dashboard refreshed");
 }, 5000);
 
