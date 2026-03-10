@@ -1,5 +1,16 @@
 const API = "http://localhost:8000";
+function showNotification(message, type) {
 
+    const box = document.getElementById("notification");
+
+    box.innerText = message;
+    box.className = type;
+    box.style.display = "block";
+
+    setTimeout(() => {
+        box.style.display = "none";
+    }, 3000);
+}
 async function loadHealth() {
     const res = await fetch(API + "/health");
     const data = await res.json();
@@ -42,14 +53,30 @@ async function loadHistory() {
 }
 
 async function createBackup() {
-    await fetch(API + "/backup", {method: "POST"});
+
+    const res = await fetch(API + "/backup", {method: "POST"});
+    const data = await res.json();
+
+    if (data.success) {
+        showNotification("Backup created successfully", "success");
+    } else {
+        showNotification("Backup failed", "error");
+    }
+
     loadBackups();
     loadHistory();
 }
 
 async function restoreBackup() {
-    await fetch(API + "/restore", {method: "POST"});
-    alert("Database restored");
+
+    const res = await fetch(API + "/restore", {method: "POST"});
+    const data = await res.json();
+
+    if (data.success) {
+        showNotification("Database restored successfully", "success");
+    } else {
+        showNotification("Restore failed", "error");
+    }
 }
 async function loadPods() {
 
