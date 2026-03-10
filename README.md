@@ -138,9 +138,9 @@ Returns service status.
 ```
 GET /backups
 ```
-GET /backups
+### Show available backup files
 ```
-Shows available backup files.
+GET /backups
 ```
 ### Create Backup
 ```
@@ -212,4 +212,5 @@ Backup retention policies
 ## Conclusion
 
 This project demonstrates how Kubernetes resources such as StatefulSets, PersistentVolumeClaims, Deployments, RBAC, and CronJobs can be combined to implement a basic backup management system for stateful workloads. It provides both manual and automated backup capabilities and tracks backup history for operational visibility.
+
 
